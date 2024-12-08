@@ -2,6 +2,10 @@
 
 This is Part 1 of a two-part exploration into Bergen's bicycle rental trends. In this installment, we roll up our sleeves for **data cleaning**, build **simple predictive models**, and end with a **semi-interactive map** showcasing bike traffic across stations. Part 2 promises to dive deeper into the "data sciency" stuff, exploring advanced methods to predict ride volumes with greater precision.
 
+## Data Sources
+
+- **[Bysykkel Data](https://bergenbysykkel.no/apne-data/historisk)**: Historical bike rental data provided by Bergen Bysykkel.
+- **[Weather Data](https://seklima.met.no/observations/?fbclid=IwY2xjawHC3BlleHRuA2FlbQIxMAABHR-1J8AxQO7W68khnBEDM7aVue4GLeWghu0CrBYHs3b1dowE8Wq2u1oBXQ_aem_HFWzKgdTgLH6cHBCCTq4RA)**: Hourly weather observations obtained from SeKlima.
 
 
 ## Highlights of Part 1
