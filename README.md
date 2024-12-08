@@ -41,6 +41,8 @@ This project builds on the **BAN400** course at the [Norwegian School of Economi
 - Problem statements and solution preparation guides provided in the Fall 2021 home exam for BAN400.
 - [Hoa Nguyen’s Bergen Bysykkel Analysis](https://github.com/hoanguyen18/Bergen-Bysykkel-) for insights into regression modeling and visualization techniques, which were adapted and expanded upon independently.
 
+Additionally, this project features my own improvisation of latitude-longitude plotting techniques to align with evolving geospatial visualization methods, incorporating interactive mapping elements using leaflet.
+
 ## Legal and Ethical Notes
 
 - This project references the BAN400 solution preparation material as a learning guide while ensuring originality in implementation and analysis.
