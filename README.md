@@ -43,7 +43,7 @@ Stay tuned as we transition from foundational data cleaning to cutting-edge mode
 
 This project builds on the **BAN400** course at the [Norwegian School of Economics (NHH)](https://www.nhh.no/en/courses/r-programming-for-data-science/). The analysis was inspired by:
 - Problem statements and solution preparation guides provided in the Fall 2021 home exam for BAN400.
-- [Hoa Nguyen’s Bergen Bysykkel Analysis](https://github.com/hoanguyen18/Bergen-Bysykkel-) which offered practical approaches to regression modeling and visualization. While Hoa Nguyen’s work was based on NHH’s solution preparation, this project introduces refinements and adjustments to suit the unique requirements of the 2024 dataset.
+- [Hoa Nguyen’s Bergen Bysykkel Analysis](https://github.com/hoanguyen18/Bergen-Bysykkel-), which used the 2021 dataset, this project introduces adjustments and utilizes a renewed 2024 dataset for updated insights.
 
 A notable difference in this project is the use of the leaflet package for geospatial visualization. Unlike other approaches that rely on APIs with restricted access, leaflet offers a free and open API for interactive maps. This choice enhances the accessibility and reproducibility of the analysis while delivering a highly engaging user experience with features like zoom controls, hover effects, and categorized markers.
 
