@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Syed Amjad Ali">
+
+<title>Bergen Bysykkel 2024: Exploratory and Predictive Analytics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Table of Contents_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Table of Contents_files/libs/quarto-html/quarto.js"></script>
+<script src="Table of Contents_files/libs/quarto-html/popper.min.js"></script>
+<script src="Table of Contents_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Table of Contents_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Table of Contents_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Table of Contents_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Table of Contents_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Table of Contents_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Table of Contents_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+<script src="Table of Contents_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="Table of Contents_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="Table of Contents_files/libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="Table of Contents_files/libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="Table of Contents_files/libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="Table of Contents_files/libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="Table of Contents_files/libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="Table of Contents_files/libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="Table of Contents_files/libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<link href="Table of Contents_files/libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet">
+<script src="Table of Contents_files/libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script>
+<script src="Table of Contents_files/libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script>
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#bergen-bysykkel-2024-exploratory-and-predictive-analytics" id="toc-bergen-bysykkel-2024-exploratory-and-predictive-analytics" class="nav-link active" data-scroll-target="#bergen-bysykkel-2024-exploratory-and-predictive-analytics">Bergen Bysykkel 2024: Exploratory and Predictive Analytics</a>
+  <ul class="collapse">
+  <li><a href="#part-1-exploratory-analysis" id="toc-part-1-exploratory-analysis" class="nav-link" data-scroll-target="#part-1-exploratory-analysis">Part 1: Exploratory Analysis</a>
+  <ul class="collapse">
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#data-collection-and-preprocessing" id="toc-data-collection-and-preprocessing" class="nav-link" data-scroll-target="#data-collection-and-preprocessing">Data Collection and Preprocessing</a></li>
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics">Descriptive Statistics</a></li>
+  <li><a href="#visualizations" id="toc-visualizations" class="nav-link" data-scroll-target="#visualizations">Visualizations</a></li>
+  <li><a href="#visualization-2" id="toc-visualization-2" class="nav-link" data-scroll-target="#visualization-2">Visualization 2</a></li>
+  </ul></li>
+  <li><a href="#part-2-predictive-analytics" id="toc-part-2-predictive-analytics" class="nav-link" data-scroll-target="#part-2-predictive-analytics">Part 2: Predictive Analytics</a>
+  <ul class="collapse">
+  <li><a href="#regression-modeling" id="toc-regression-modeling" class="nav-link" data-scroll-target="#regression-modeling">Regression Modeling</a></li>
+  <li><a href="#weather-data-integration" id="toc-weather-data-integration" class="nav-link" data-scroll-target="#weather-data-integration">Weather Data Integration</a></li>
+  <li><a href="#advanced-prediction-models" id="toc-advanced-prediction-models" class="nav-link" data-scroll-target="#advanced-prediction-models">Advanced Prediction Models</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Bergen Bysykkel 2024: Exploratory and Predictive Analytics</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Syed Amjad Ali </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="bergen-bysykkel-2024-exploratory-and-predictive-analytics" class="level1">
+<h1>Bergen Bysykkel 2024: Exploratory and Predictive Analytics</h1>
+<section id="part-1-exploratory-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-exploratory-analysis">Part 1: Exploratory Analysis</h2>
+<section id="setup" class="level3">
+<h3 class="anchored" data-anchor-id="setup">Setup</h3>
+<section id="loading-required-libraries" class="level4">
+<h4 class="anchored" data-anchor-id="loading-required-libraries">Loading Required Libraries</h4>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(assertthat)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggmap)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="data-collection-and-preprocessing" class="level3">
+<h3 class="anchored" data-anchor-id="data-collection-and-preprocessing">Data Collection and Preprocessing</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Read in all bike rides from 01 Jan 2024 to 8 Dec 2024</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a List of all files in directory named with a key word, say all `.csv` files</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>filenames <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"byssykkel-data-2024"</span>, <span class="at">pattern=</span><span class="st">".csv"</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># read and row bind all data sets</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>bike_rides_2024_data <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(<span class="fu">lapply</span>(filenames,fread))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Make a combination of observations for every station, date and hour of day.</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>start_station_id <span class="ot">=</span> <span class="fu">as.double</span>(<span class="fu">unique</span>(bike_rides_2024_data<span class="sc">$</span>start_station_id))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>floor_start_dh <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">as.POSIXct</span>(<span class="st">"2024-01-01 00:00:00"</span>), <span class="fu">as.POSIXct</span>(<span class="st">"2024-12-19 23:00:00"</span>), <span class="at">by =</span> <span class="st">"hours"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand.grid</span>(floor_start_dh, start_station_id) <span class="sc">%&gt;%</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">floor_start_dh =</span> Var1,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">start_station_id =</span> Var2) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(start_station_id)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        floor_start_dh start_station_id
+1  2024-01-01 00:00:00                3
+2  2024-01-01 01:00:00                3
+3  2024-01-01 02:00:00                3
+4  2024-01-01 03:00:00                3
+5  2024-01-01 04:00:00                3
+6  2024-01-01 05:00:00                3
+7  2024-01-01 06:00:00                3
+8  2024-01-01 07:00:00                3
+9  2024-01-01 08:00:00                3
+10 2024-01-01 09:00:00                3</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Count of rides for each hour </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bike_rides_2024 <span class="ot">&lt;-</span> bike_rides_2024_data <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">start_date =</span> <span class="fu">format</span>(<span class="fu">as.POSIXct</span>(.<span class="sc">$</span>started_at, <span class="st">'%Y-%m-%d %H:%M:%S'</span>), <span class="st">'%Y-%m-%d %H:%00:%00'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(start_station_id, start_date) <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_rides =</span> <span class="fu">n</span>())</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Change the class of start_date into date type (instead of character)</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>bike_rides_2024<span class="sc">$</span>start_date <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(bike_rides_2024<span class="sc">$</span>start_date )</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>bike_rides_2024</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 217,104 × 3
+# Groups:   start_station_id [123]
+   start_station_id start_date          n_rides
+              &lt;int&gt; &lt;dttm&gt;                &lt;int&gt;
+ 1                3 2024-01-01 11:00:00       1
+ 2                3 2024-01-01 12:00:00       3
+ 3                3 2024-01-01 15:00:00       1
+ 4                3 2024-01-01 21:00:00       1
+ 5                3 2024-01-02 05:00:00       1
+ 6                3 2024-01-02 06:00:00       1
+ 7                3 2024-01-02 09:00:00       1
+ 8                3 2024-01-02 12:00:00       1
+ 9                3 2024-01-02 14:00:00       1
+10                3 2024-01-02 17:00:00       1
+# ℹ 217,094 more rows</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">##join the data and fill the NA value (no ride in that hour) as "0"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_agg <span class="ot">&lt;-</span> <span class="fu">left_join</span>(df, bike_rides_2024, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"start_station_id"</span> <span class="ot">=</span> <span class="st">"start_station_id"</span>, <span class="st">"floor_start_dh"</span> <span class="ot">=</span> <span class="st">"start_date"</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df_agg [<span class="fu">is.na</span>(df_agg )] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">## create weekday start as 1-&gt; 7 (Sunday=1 to Saturday=7), start_hour as 0 -&gt; 23</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>df_agg <span class="ot">&lt;-</span> df_agg <span class="sc">%&gt;%</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">start_hour=</span><span class="fu">as.factor</span>(<span class="fu">hour</span>(floor_start_dh)),<span class="at">weekday_start=</span><span class="fu">as.factor</span>(<span class="fu">wday</span>(floor_start_dh)))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_agg,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        floor_start_dh start_station_id n_rides start_hour weekday_start
+1  2024-01-01 00:00:00                3       0          0             2
+2  2024-01-01 01:00:00                3       0          1             2
+3  2024-01-01 02:00:00                3       0          2             2
+4  2024-01-01 03:00:00                3       0          3             2
+5  2024-01-01 04:00:00                3       0          4             2
+6  2024-01-01 05:00:00                3       0          5             2
+7  2024-01-01 06:00:00                3       0          6             2
+8  2024-01-01 07:00:00                3       0          7             2
+9  2024-01-01 08:00:00                3       0          8             2
+10 2024-01-01 09:00:00                3       0          9             2</code></pre>
+</div>
+</div>
+</section>
+<section id="descriptive-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="descriptive-statistics">Descriptive Statistics</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Name the data set df_agg and show that the data set passes 2 tests below:</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Test 1</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">assert_that</span>(df_agg <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">group_by</span>(start_station_id, floor_start_dh) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>              <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>              <span class="fu">summarise</span>(<span class="at">max_n =</span> <span class="fu">max</span>(n)) <span class="sc">%$%</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>              max_n <span class="sc">==</span> <span class="dv">1</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">msg =</span> <span class="st">"Duplicates on stations/hours/dates"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Test 2</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assert_that</span>(df_agg <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>              <span class="fu">group_by</span>(start_station_id) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">mutate</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">timediff =</span> floor_start_dh <span class="sc">-</span> <span class="fu">lag</span>(floor_start_dh,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">order_by =</span> floor_start_dh)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>              ) <span class="sc">%&gt;%</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>              <span class="fu">filter</span>(<span class="fu">as.numeric</span>(timediff) <span class="sc">!=</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>              <span class="fu">nrow</span>(.) <span class="sc">==</span> <span class="dv">0</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">msg=</span><span class="st">"Time diffs. between obs are not always 1 hour"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="visualizations" class="level3">
+<h3 class="anchored" data-anchor-id="visualizations">Visualizations</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">##Problem 3:</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">##(a) Estimate a linear regression model for each of the stations. </span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Using factors for weekdays and hour of day as explanatory variables </span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#and n_rides as the response variable. Determine the exact specification </span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#as you see fit.</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Split input data into train set and test set (grouped by station id, train/test ratio is 3/1)</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>by_station <span class="ot">&lt;-</span> df_agg <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(start_station_id) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">split =</span> <span class="fu">list</span>(<span class="fu">initial_time_split</span>(<span class="fu">cur_data</span>()))) <span class="sc">%&gt;%</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(start_station_id) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">data.train=</span><span class="fu">list</span>(<span class="fu">training</span>(split[[<span class="dv">1</span>]])),<span class="at">data.test=</span><span class="fu">list</span>(<span class="fu">testing</span>(split[[<span class="dv">1</span>]]))) <span class="sc">%&gt;%</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>split)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>by_station</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 123 × 3
+# Groups:   start_station_id [123]
+   start_station_id data.train           data.test           
+              &lt;dbl&gt; &lt;list&gt;               &lt;list&gt;              
+ 1                3 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt;
+ 2                5 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt;
+ 3                7 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt;
+ 4                8 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt;
+ 5               22 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt;
+ 6               24 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt;
+ 7               33 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt;
+ 8               34 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt;
+ 9               36 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt;
+10               49 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt;
+# ℹ 113 more rows</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="fu">setNames</span>(by_station<span class="sc">$</span>data.train, by_station<span class="sc">$</span>start_station_id)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$`3`
+ floor_start_dh                   n_rides         start_hour   weekday_start
+ Min.   :2024-01-01 00:00:00   Min.   :0.0000   0      : 266   1:900        
+ 1st Qu.:2024-03-07 08:45:00   1st Qu.:0.0000   1      : 266   2:912        
+ Median :2024-05-12 18:30:00   Median :0.0000   3      : 266   3:912        
+ Mean   :2024-05-12 18:30:00   Mean   :0.6497   4      : 266   4:912        
+ 3rd Qu.:2024-07-18 03:15:00   3rd Qu.:1.0000   5      : 266   5:912        
+ Max.   :2024-09-22 12:00:00   Max.   :9.0000   6      : 266   6:912        
+                                                (Other):4776   7:912        
+
+$`5`
+ floor_start_dh                   n_rides          start_hour   weekday_start
+ Min.   :2024-01-01 00:00:00   Min.   : 0.0000   0      : 266   1:900        
+ 1st Qu.:2024-03-07 08:45:00   1st Qu.: 0.0000   1      : 266   2:912        
+ Median :2024-05-12 18:30:00   Median : 0.0000   3      : 266   3:912        
+ Mean   :2024-05-12 18:30:00   Mean   : 0.5956   4      : 266   4:912        
+ 3rd Qu.:2024-07-18 03:15:00   3rd Qu.: 1.0000   5      : 266   5:912        
+ Max.   :2024-09-22 12:00:00   Max.   :10.0000   6      : 266   6:912        
+                                                 (Other):4776   7:912        </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="fu">setNames</span>(by_station<span class="sc">$</span>data.test, by_station<span class="sc">$</span>start_station_id)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$`3`
+ floor_start_dh                   n_rides         start_hour   weekday_start
+ Min.   :2024-09-22 13:00:00   Min.   :0.0000   2      :  89   1:300        
+ 1st Qu.:2024-10-14 15:45:00   1st Qu.:0.0000   13     :  89   2:312        
+ Median :2024-11-05 17:30:00   Median :0.0000   14     :  89   3:312        
+ Mean   :2024-11-05 17:30:00   Mean   :0.4793   15     :  89   4:312        
+ 3rd Qu.:2024-11-27 20:15:00   3rd Qu.:1.0000   16     :  89   5:312        
+ Max.   :2024-12-19 23:00:00   Max.   :8.0000   17     :  89   6:288        
+                                                (Other):1590   7:288        
+
+$`5`
+ floor_start_dh                   n_rides          start_hour   weekday_start
+ Min.   :2024-09-22 13:00:00   Min.   : 0.0000   2      :  89   1:300        
+ 1st Qu.:2024-10-14 15:45:00   1st Qu.: 0.0000   13     :  89   2:312        
+ Median :2024-11-05 17:30:00   Median : 0.0000   14     :  89   3:312        
+ Mean   :2024-11-05 17:30:00   Mean   : 0.5099   15     :  89   4:312        
+ 3rd Qu.:2024-11-27 20:15:00   3rd Qu.: 1.0000   16     :  89   5:312        
+ Max.   :2024-12-19 23:00:00   Max.   :10.0000   17     :  89   6:288        
+                                                 (Other):1590   7:288        </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="do">## A function that fits the linear regression model to each station</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>station_model <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(n_rides<span class="sc">~</span>weekday_start <span class="sc">+</span> start_hour, <span class="at">data=</span>df)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># put the linear model to each station by using purrr:map() to apply the model to each element</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>models <span class="ot">&lt;-</span> <span class="fu">map</span>(by_station<span class="sc">$</span>data.train, station_model)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Put the model inside a mutate</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>by_station <span class="ot">&lt;-</span> by_station <span class="sc">%&gt;%</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(start_station_id) <span class="sc">%&gt;%</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="fu">map</span>(data.train, station_model)) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>by_station</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 123 × 4
+   start_station_id data.train           data.test            model 
+              &lt;dbl&gt; &lt;list&gt;               &lt;list&gt;               &lt;list&gt;
+ 1                3 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;  
+ 2                5 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;  
+ 3                7 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;  
+ 4                8 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;  
+ 5               22 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;  
+ 6               24 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;  
+ 7               33 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;  
+ 8               34 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;  
+ 9               36 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;  
+10               49 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;  
+# ℹ 113 more rows</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Check models of station 2 and station 3</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>by_station <span class="sc">%&gt;%</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(start_station_id <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pluck</span>(<span class="st">"model"</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Length  Class   Mode 
+     0   NULL   NULL </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>by_station <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(start_station_id <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pluck</span>(<span class="st">"model"</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = n_rides ~ weekday_start + start_hour, data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.5594 -0.6090 -0.1085  0.2160  7.7419 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    -0.184505   0.065495  -2.817  0.00486 ** 
+weekday_start2  0.213062   0.044839   4.752 2.06e-06 ***
+weekday_start3  0.271177   0.044839   6.048 1.55e-09 ***
+weekday_start4  0.310650   0.044839   6.928 4.69e-12 ***
+weekday_start5  0.297492   0.044839   6.635 3.52e-11 ***
+weekday_start6  0.186747   0.044839   4.165 3.16e-05 ***
+weekday_start7  0.038720   0.044839   0.864  0.38787    
+start_hour1    -0.003759   0.082750  -0.045  0.96377    
+start_hour2    -0.004470   0.082828  -0.054  0.95696    
+start_hour3     0.007519   0.082750   0.091  0.92761    
+start_hour4     0.150376   0.082750   1.817  0.06923 .  
+start_hour5     0.548872   0.082750   6.633 3.56e-11 ***
+start_hour6     1.180451   0.082750  14.265  &lt; 2e-16 ***
+start_hour7     1.022556   0.082750  12.357  &lt; 2e-16 ***
+start_hour8     0.759398   0.082750   9.177  &lt; 2e-16 ***
+start_hour9     0.605263   0.082750   7.314 2.91e-13 ***
+start_hour10    0.710526   0.082750   8.586  &lt; 2e-16 ***
+start_hour11    0.733083   0.082750   8.859  &lt; 2e-16 ***
+start_hour12    0.883459   0.082750  10.676  &lt; 2e-16 ***
+start_hour13    1.354021   0.082828  16.347  &lt; 2e-16 ***
+start_hour14    1.433266   0.082828  17.304  &lt; 2e-16 ***
+start_hour15    1.384209   0.082828  16.712  &lt; 2e-16 ***
+start_hour16    1.229492   0.082828  14.844  &lt; 2e-16 ***
+start_hour17    0.935153   0.082828  11.290  &lt; 2e-16 ***
+start_hour18    0.859681   0.082828  10.379  &lt; 2e-16 ***
+start_hour19    0.580436   0.082828   7.008 2.67e-12 ***
+start_hour20    0.671002   0.082828   8.101 6.48e-16 ***
+start_hour21    0.406851   0.082828   4.912 9.24e-07 ***
+start_hour22    0.055908   0.082828   0.675  0.49971    
+start_hour23   -0.004470   0.082828  -0.054  0.95696    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.9543 on 6342 degrees of freedom
+Multiple R-squared:  0.2082,    Adjusted R-squared:  0.2045 
+F-statistic: 57.49 on 29 and 6342 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">##(b) Predict the number of rides for each hour of day, </span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#weekday and station using these regression models. </span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Collect the predictions in a data structure, together with the station ID.</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>by_station <span class="ot">&lt;-</span> by_station <span class="sc">%&gt;%</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(start_station_id) <span class="sc">%&gt;%</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">predictions =</span> <span class="fu">list</span>(<span class="fu">predict</span>(model[[<span class="dv">1</span>]], <span class="at">newdata=</span>data.test[[<span class="dv">1</span>]]))) <span class="sc">%&gt;%</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>by_station</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 123 × 5
+   start_station_id data.train           data.test            model  predictions
+              &lt;dbl&gt; &lt;list&gt;               &lt;list&gt;               &lt;list&gt; &lt;list&gt;     
+ 1                3 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;   &lt;dbl&gt;      
+ 2                5 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;   &lt;dbl&gt;      
+ 3                7 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;   &lt;dbl&gt;      
+ 4                8 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;   &lt;dbl&gt;      
+ 5               22 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;   &lt;dbl&gt;      
+ 6               24 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;   &lt;dbl&gt;      
+ 7               33 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;   &lt;dbl&gt;      
+ 8               34 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;   &lt;dbl&gt;      
+ 9               36 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;   &lt;dbl&gt;      
+10               49 &lt;tibble [6,372 × 4]&gt; &lt;tibble [2,124 × 4]&gt; &lt;lm&gt;   &lt;dbl&gt;      
+# ℹ 113 more rows</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>prediction_df_from_station_nr <span class="ot">&lt;-</span> <span class="cf">function</span>(station_nr) {</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  by_station <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(start_station_id <span class="sc">==</span> station_nr) <span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">c</span>(data.test, predictions)) <span class="sc">%&gt;%</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest</span>(<span class="fu">c</span>(data.test, predictions)) <span class="sc">%&gt;%</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">start_station_id =</span> station_nr)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>predictions_from_all_stations <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">map</span>(by_station<span class="sc">$</span>start_station_id, prediction_df_from_station_nr))</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>predictions_from_all_stations</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 261,252 × 6
+   floor_start_dh      n_rides start_hour weekday_start predictions
+   &lt;dttm&gt;                &lt;dbl&gt; &lt;fct&gt;      &lt;fct&gt;               &lt;dbl&gt;
+ 1 2024-09-22 13:00:00       1 13         1                   1.17 
+ 2 2024-09-22 14:00:00       1 14         1                   1.25 
+ 3 2024-09-22 15:00:00       0 15         1                   1.20 
+ 4 2024-09-22 16:00:00       0 16         1                   1.04 
+ 5 2024-09-22 17:00:00       1 17         1                   0.751
+ 6 2024-09-22 18:00:00       1 18         1                   0.675
+ 7 2024-09-22 19:00:00       0 19         1                   0.396
+ 8 2024-09-22 20:00:00       0 20         1                   0.486
+ 9 2024-09-22 21:00:00       1 21         1                   0.222
+10 2024-09-22 22:00:00       0 22         1                  -0.129
+# ℹ 261,242 more rows
+# ℹ 1 more variable: start_station_id &lt;dbl&gt;</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="do">##(c) Create a set of plots showing the predicted number of bicycle rides throughout an entire week.</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Place predicted volume on the y-axis and the hour of day on the x-axis. </span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Make one plot per day of week. Use different colors for each station, </span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">#and format the plots as appropriate.</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>predictions_from_all_stations <span class="sc">%&gt;%</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(floor_start_dh <span class="sc">&gt;</span> <span class="st">"2024-10-01 00:00:00"</span>, floor_start_dh <span class="sc">&lt;=</span> <span class="st">"2024-10-08 00:00:00"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(start_hour), <span class="at">y =</span> predictions, <span class="at">color =</span> <span class="fu">factor</span>(start_station_id))) <span class="sc">+</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Start Hour"</span>,</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Predictions"</span>,</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Start Station ID"</span>,</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Hourly Bicycle Ride Count Prediction Per Station from 2024-10-01 to 2024-10-07"</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(weekday_start), <span class="at">scales =</span> <span class="st">"fixed"</span>, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Table-of-Contents_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="visualization-2" class="level3">
+<h3 class="anchored" data-anchor-id="visualization-2">Visualization 2</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="do">##### Problem 4:</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   Create a function with the following specifications</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># • The function should, as a minimum, take as arguments the date and the hour.</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># • The function should return a plot with the following properties:</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   </span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   – The latitude and the longitude should be mapped to the x and the y-axis respectively.</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co"># – The plot should give information about the traffic volume (or predicted traffic volume) for each of the stations in the data set at the given time.</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co"># – The plot should be well formatted.</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that the latitude and longitude of the stations may change over time. Use your best judgement to overcome this problem in order to make a figure that informs the reader of where bicycle traffic is originating from in Bergen at given times.</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="co"># The latitude and longitude of the stations may change over time -&gt; calculate the average lon and lat of each station through time</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>station  <span class="ot">&lt;-</span> bike_rides_2024_data <span class="sc">%&gt;%</span> </span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(start_station_id, start_station_longitude, start_station_latitude) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(start_station_id) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">lon =</span> <span class="fu">sum</span>(start_station_longitude)<span class="sc">/</span><span class="fu">n</span>(), <span class="at">lat =</span> <span class="fu">sum</span>(start_station_latitude)<span class="sc">/</span><span class="fu">n</span>())</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>station</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 123 × 3
+   start_station_id   lon   lat
+              &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1                3  5.33  60.4
+ 2                5  5.33  60.4
+ 3                7  5.32  60.4
+ 4                8  5.36  60.4
+ 5               22  5.32  60.4
+ 6               24  5.35  60.4
+ 7               33  5.35  60.4
+ 8               34  5.33  60.4
+ 9               36  5.32  60.4
+10               49  5.32  60.4
+# ℹ 113 more rows</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># join data of lon and lat of each station into the df_agg</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>df_agg_lonlat <span class="ot">&lt;-</span> <span class="fu">left_join</span>(df_agg, station , <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"start_station_id"</span> <span class="ot">=</span> <span class="st">"start_station_id"</span>))</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_agg_lonlat,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        floor_start_dh start_station_id n_rides start_hour weekday_start
+1  2024-01-01 00:00:00                3       0          0             2
+2  2024-01-01 01:00:00                3       0          1             2
+3  2024-01-01 02:00:00                3       0          2             2
+4  2024-01-01 03:00:00                3       0          3             2
+5  2024-01-01 04:00:00                3       0          4             2
+6  2024-01-01 05:00:00                3       0          5             2
+7  2024-01-01 06:00:00                3       0          6             2
+8  2024-01-01 07:00:00                3       0          7             2
+9  2024-01-01 08:00:00                3       0          8             2
+10 2024-01-01 09:00:00                3       0          9             2
+        lon     lat
+1  5.328564 60.3882
+2  5.328564 60.3882
+3  5.328564 60.3882
+4  5.328564 60.3882
+5  5.328564 60.3882
+6  5.328564 60.3882
+7  5.328564 60.3882
+8  5.328564 60.3882
+9  5.328564 60.3882
+10 5.328564 60.3882</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a function</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>plot_map_leaflet <span class="ot">&lt;-</span> <span class="cf">function</span>(date_and_hour) {</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> df_agg_lonlat <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(floor_start_dh <span class="sc">==</span> date_and_hour)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define distinct colors for small and larger ranges of bike rides</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  ride_colors <span class="ot">&lt;-</span> <span class="fu">colorFactor</span>(</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#e41a1c"</span>, <span class="st">"#377eb8"</span>, <span class="st">"#4daf4a"</span>, <span class="st">"#984ea3"</span>, <span class="st">"#ff7f00"</span>, <span class="st">"#ffff33"</span>), <span class="co"># Added a color for &gt;4</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="st">"5+"</span>),  <span class="co"># Add a category for "5+"</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">na.color =</span> <span class="st">"black"</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create a new column for categorized rides</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">ride_category =</span> <span class="fu">case_when</span>(</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>        n_rides <span class="sc">&lt;=</span> <span class="dv">4</span> <span class="sc">~</span> <span class="fu">as.character</span>(n_rides),</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>        n_rides <span class="sc">&gt;</span> <span class="dv">4</span>  <span class="sc">~</span> <span class="st">"5+"</span>  <span class="co"># Group all rides &gt;4 into "5+"</span></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">leaflet</span>(df) <span class="sc">%&gt;%</span></span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span>  <span class="co"># Adds OSM tiles</span></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addCircleMarkers</span>(</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">lng =</span> <span class="sc">~</span>lon,</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">lat =</span> <span class="sc">~</span>lat,</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">radius =</span> <span class="sc">~</span><span class="fu">ifelse</span>(n_rides <span class="sc">&gt;</span> <span class="dv">0</span>, n_rides <span class="sc">*</span> <span class="dv">3</span>, <span class="dv">5</span>),  <span class="co"># Scaled marker size, minimum size for 0 rides</span></span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="sc">~</span><span class="fu">ride_colors</span>(ride_category),  <span class="co"># Apply distinct colors based on ride_category</span></span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="sc">~</span><span class="fu">paste</span>(<span class="st">"Station ID:"</span>, start_station_id, <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"Rides:"</span>, n_rides),  <span class="co"># Tooltip for hover</span></span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">popup =</span> <span class="sc">~</span><span class="fu">paste</span>(<span class="st">"&lt;strong&gt;Station ID:&lt;/strong&gt;"</span>, start_station_id, <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"&lt;strong&gt;Number of Rides:&lt;/strong&gt;"</span>, n_rides, <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"&lt;strong&gt;Time:&lt;/strong&gt;"</span>, date_and_hour)  <span class="co"># Detailed popup</span></span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addLegend</span>(</span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>      <span class="st">"bottomright"</span>,</span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">pal =</span> ride_colors,</span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a>      <span class="at">values =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="st">"5+"</span>),</span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Rides on"</span>, date_and_hour),  <span class="co"># Dynamic title</span></span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>      <span class="at">opacity =</span> <span class="dv">1</span></span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addScaleBar</span>(<span class="at">position =</span> <span class="st">"bottomleft"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addMiniMap</span>(<span class="at">toggleDisplay =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addControl</span>(</span>
+<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>      <span class="at">html =</span> <span class="fu">paste</span>(<span class="st">"&lt;h4&gt;Bicycle Traffic Volume at"</span>, date_and_hour, <span class="st">"&lt;/h4&gt;"</span>),</span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">position =</span> <span class="st">"topright"</span></span>
+<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the plot with a specific date and hour</span></span>
+<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_map_leaflet</span>(<span class="st">"2024-06-08 13:00:00"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5752147b3751ac9e7f40" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-5752147b3751ac9e7f40">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[60.38819667374428,60.37878279018754,60.3913858066772,60.37363792062825,60.39638423113168,60.37831673774706,60.36917984497659,60.38246949877819,60.39296122355292,60.38719801795014,60.39375532002469,60.38606877769094,60.38963215691684,60.39987652272945,60.39245536165015,60.39041411052241,60.38543124330305,60.36742545319046,60.38962622255798,60.39587700209405,60.39198360041338,60.39225759607076,60.39947506336557,60.40569501689434,60.39587808663881,60.39309812241306,60.39265146337743,60.38225474556282,60.39513794308245,60.38393438332219,60.38967202352878,60.38853002489311,60.39705738914522,60.39267683527632,60.37989415164277,60.40858210278468,60.41294568274233,60.39148438859137,60.39397677863769,60.38811788909039,60.37911124360613,60.3911239589824,60.3867091497868,60.38446734102658,60.38151150199542,60.37810721367396,60.37625279587284,60.37514055132067,60.38103776618005,60.37398593985714,60.37608299480986,60.38890977889045,60.38785633733042,60.38705878935416,60.38828383354144,60.39010871793987,60.38668149584837,60.38658166593217,60.38658238047282,60.38824732496975,60.38785371337485,60.38972226200196,60.39118461048114,60.3906427466302,60.39017406113997,60.39770902893835,60.39865649373252,60.38026271377996,60.40222876911276,60.40809699300578,60.41092918246059,60.40190553013225,60.39694922433324,60.39507011297705,60.39514386434325,60.39454985253084,60.39368954863401,60.38316244112318,60.39631712777814,60.37802198798124,60.38592287520763,60.38445114789948,60.39509948572179,60.38604412210009,60.38591618700343,60.39066508674793,60.39901997750764,60.38971028611195,60.389046875094,60.39097915423839,60.37049377702598,60.393323250707,60.40568787342849,60.39886453454994,60.42334343329279,60.37205063801959,60.37957605699611,60.37708169275558,60.38839120838912,60.38422650043982,60.38174958551063,60.38004440263938,60.40175764348675,60.41830821831951,60.40248149976335,60.34970058430721,60.3454585991698,60.34103053759091,60.35131138665341,60.34877037988127,60.37178687508714,60.35779657270476,60.34541065445747,60.34515023813836,60.35476186261224,60.35264796598477,60.35445411401244,60.34929962482292,60.36046422871606,60.34722011283134,60.36532221620897,60.36877700028643,60.39922323697098],[5.328564137089415,5.333327487210227,5.319194867192266,5.35659456239955,5.324169337618514,5.350897458652753,5.349443793165847,5.32609348920866,5.32355212981606,5.322980046239536,5.321792095801356,5.300108307274058,5.286516470683409,5.304686307890734,5.320185176096857,5.332650453823391,5.337431780062616,5.355191063437474,5.3298637396027,5.307755827707297,5.32661819461282,5.314785825568292,5.308762204430565,5.323373526334763,5.325283812313046,5.327022724925883,5.328976911981612,5.332332469910853,5.314946630388023,5.333450454511649,5.333605085201953,5.318665231464365,5.314548482139799,5.317308285189142,5.352077326054496,5.322648583141812,5.320870309021841,5.328519197920741,5.318713236118584,5.331487235597251,5.361202283994771,5.325713785893413,5.299130112557806,5.310007717995973,5.319435364152127,5.331020769519228,5.334276104612741,5.338517421420761,5.35905189499951,5.342082137178068,5.339851409058042,5.333817119783134,5.334459219764085,5.335633911730724,5.332872680372475,5.335387433757433,5.3309780770646,5.327978744635743,5.326041074182427,5.324558211682643,5.318712852428234,5.314854189834826,5.318026298282803,5.324397430398562,5.324792207669702,5.32200057798218,5.322142586456494,5.323223146883635,5.320744723528605,5.325510899047174,5.324662770153281,5.324747767839425,5.313494727727743,5.31879835082907,5.320002322335455,5.327049981572372,5.3265806966931,5.324053067317891,5.31514705012091,5.329383048102329,5.321431717819451,5.324440726278226,5.328645087376344,5.349253890141261,5.319206933440256,5.333027169585989,5.303322069576893,5.314041873201262,5.321882967938819,5.320656172070585,5.353846489647282,5.330654155344547,5.325658910381037,5.306410871328268,5.303070676006087,5.352659970408496,5.344655017198988,5.335575458852787,5.340861023495367,5.311487114022952,5.331698655041777,5.350823586678217,5.316562300638424,5.309946203281243,5.316471128195502,5.278626852345383,5.297121899354551,5.291006144381328,5.289942788398179,5.288172686196418,5.349552885719248,5.342069876253731,5.28332212346433,5.286669158622601,5.293049946752319,5.298680226505098,5.299180336561079,5.288490147562243,5.290126212391755,5.273174034250616,5.344795288464837,5.34229516452919,5.310525720925853],[3,5,5,3,5,3,5,3,5,6,5,5,5,5,5,9,5,3,9,5,3,3,3,5,3,3,5,5,3,5,5,5,6,5,3,5,5,5,3,3,5,5,5,5,5,3,5,6,5,5,3,12,5,3,5,5,3,5,5,5,3,5,3,3,3,9,5,3,5,5,5,6,6,5,5,3,5,3,3,3,3,5,5,3,5,5,3,5,5,3,5,5,5,5,5,5,3,3,5,5,9,3,5,5,5,5,5,5,5,5,6,5,5,5,5,5,5,5,5,5,5,5,5],null,null,{"interactive":true,"className":"","stroke":true,"color":["#377EB8","#E41A1C","#E41A1C","#377EB8","#E41A1C","#377EB8","#E41A1C","#377EB8","#E41A1C","#4DAF4A","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#984EA3","#E41A1C","#377EB8","#984EA3","#E41A1C","#377EB8","#377EB8","#377EB8","#E41A1C","#377EB8","#377EB8","#E41A1C","#E41A1C","#377EB8","#E41A1C","#E41A1C","#E41A1C","#4DAF4A","#E41A1C","#377EB8","#E41A1C","#E41A1C","#E41A1C","#377EB8","#377EB8","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#377EB8","#E41A1C","#4DAF4A","#E41A1C","#E41A1C","#377EB8","#FF7F00","#E41A1C","#377EB8","#E41A1C","#E41A1C","#377EB8","#E41A1C","#E41A1C","#E41A1C","#377EB8","#E41A1C","#377EB8","#377EB8","#377EB8","#984EA3","#E41A1C","#377EB8","#E41A1C","#E41A1C","#E41A1C","#4DAF4A","#4DAF4A","#E41A1C","#E41A1C","#377EB8","#E41A1C","#377EB8","#377EB8","#377EB8","#377EB8","#E41A1C","#E41A1C","#377EB8","#E41A1C","#E41A1C","#377EB8","#E41A1C","#E41A1C","#377EB8","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#377EB8","#377EB8","#E41A1C","#E41A1C","#984EA3","#377EB8","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#4DAF4A","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#377EB8","#E41A1C","#E41A1C","#377EB8","#E41A1C","#377EB8","#E41A1C","#377EB8","#E41A1C","#4DAF4A","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#984EA3","#E41A1C","#377EB8","#984EA3","#E41A1C","#377EB8","#377EB8","#377EB8","#E41A1C","#377EB8","#377EB8","#E41A1C","#E41A1C","#377EB8","#E41A1C","#E41A1C","#E41A1C","#4DAF4A","#E41A1C","#377EB8","#E41A1C","#E41A1C","#E41A1C","#377EB8","#377EB8","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#377EB8","#E41A1C","#4DAF4A","#E41A1C","#E41A1C","#377EB8","#FF7F00","#E41A1C","#377EB8","#E41A1C","#E41A1C","#377EB8","#E41A1C","#E41A1C","#E41A1C","#377EB8","#E41A1C","#377EB8","#377EB8","#377EB8","#984EA3","#E41A1C","#377EB8","#E41A1C","#E41A1C","#E41A1C","#4DAF4A","#4DAF4A","#E41A1C","#E41A1C","#377EB8","#E41A1C","#377EB8","#377EB8","#377EB8","#377EB8","#E41A1C","#E41A1C","#377EB8","#E41A1C","#E41A1C","#377EB8","#E41A1C","#E41A1C","#377EB8","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#377EB8","#377EB8","#E41A1C","#E41A1C","#984EA3","#377EB8","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#4DAF4A","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C"],"fillOpacity":0.2},null,null,["<strong>Station ID:<\/strong> 3 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 5 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 7 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 8 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 22 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 24 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 33 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 34 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 36 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 49 <br> <strong>Number of Rides:<\/strong> 2 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 58 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 69 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 70 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 75 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 82 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 83 <br> <strong>Number of Rides:<\/strong> 3 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 87 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 98 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 116 <br> <strong>Number of Rides:<\/strong> 3 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 117 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 131 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 132 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 138 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 140 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 150 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 151 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 156 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 157 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 212 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 214 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 215 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 216 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 217 <br> <strong>Number of Rides:<\/strong> 2 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 219 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 220 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 221 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 222 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 223 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 298 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 301 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 367 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 368 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 638 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 639 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 640 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 641 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 642 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 644 <br> <strong>Number of Rides:<\/strong> 2 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 645 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 646 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 788 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 789 <br> <strong>Number of Rides:<\/strong> 4 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 790 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 791 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 792 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 793 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 794 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 795 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 796 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 797 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 799 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 800 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 802 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 803 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 804 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 806 <br> <strong>Number of Rides:<\/strong> 3 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 807 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 808 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 809 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 810 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 811 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 812 <br> <strong>Number of Rides:<\/strong> 2 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 814 <br> <strong>Number of Rides:<\/strong> 2 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 815 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 816 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 817 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 818 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 819 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1043 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1045 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1046 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1047 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1048 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1816 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1887 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1888 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1889 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1890 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1891 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1892 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1893 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1894 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1895 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1896 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1897 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1898 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 1900 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 2313 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 2314 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 2321 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 2322 <br> <strong>Number of Rides:<\/strong> 3 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 2336 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 2338 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 2346 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 2352 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 3391 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 3392 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 3393 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 3394 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 3395 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 3396 <br> <strong>Number of Rides:<\/strong> 2 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 3397 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 3398 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 3399 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 3400 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 3436 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 3437 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 3438 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 3610 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 3724 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 4962 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 4963 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00","<strong>Station ID:<\/strong> 5255 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-06-08 13:00:00"],null,["Station ID: 3 &lt;br&gt; Rides: 1","Station ID: 5 &lt;br&gt; Rides: 0","Station ID: 7 &lt;br&gt; Rides: 0","Station ID: 8 &lt;br&gt; Rides: 1","Station ID: 22 &lt;br&gt; Rides: 0","Station ID: 24 &lt;br&gt; Rides: 1","Station ID: 33 &lt;br&gt; Rides: 0","Station ID: 34 &lt;br&gt; Rides: 1","Station ID: 36 &lt;br&gt; Rides: 0","Station ID: 49 &lt;br&gt; Rides: 2","Station ID: 58 &lt;br&gt; Rides: 0","Station ID: 69 &lt;br&gt; Rides: 0","Station ID: 70 &lt;br&gt; Rides: 0","Station ID: 75 &lt;br&gt; Rides: 0","Station ID: 82 &lt;br&gt; Rides: 0","Station ID: 83 &lt;br&gt; Rides: 3","Station ID: 87 &lt;br&gt; Rides: 0","Station ID: 98 &lt;br&gt; Rides: 1","Station ID: 116 &lt;br&gt; Rides: 3","Station ID: 117 &lt;br&gt; Rides: 0","Station ID: 131 &lt;br&gt; Rides: 1","Station ID: 132 &lt;br&gt; Rides: 1","Station ID: 138 &lt;br&gt; Rides: 1","Station ID: 140 &lt;br&gt; Rides: 0","Station ID: 150 &lt;br&gt; Rides: 1","Station ID: 151 &lt;br&gt; Rides: 1","Station ID: 156 &lt;br&gt; Rides: 0","Station ID: 157 &lt;br&gt; Rides: 0","Station ID: 212 &lt;br&gt; Rides: 1","Station ID: 214 &lt;br&gt; Rides: 0","Station ID: 215 &lt;br&gt; Rides: 0","Station ID: 216 &lt;br&gt; Rides: 0","Station ID: 217 &lt;br&gt; Rides: 2","Station ID: 219 &lt;br&gt; Rides: 0","Station ID: 220 &lt;br&gt; Rides: 1","Station ID: 221 &lt;br&gt; Rides: 0","Station ID: 222 &lt;br&gt; Rides: 0","Station ID: 223 &lt;br&gt; Rides: 0","Station ID: 298 &lt;br&gt; Rides: 1","Station ID: 301 &lt;br&gt; Rides: 1","Station ID: 367 &lt;br&gt; Rides: 0","Station ID: 368 &lt;br&gt; Rides: 0","Station ID: 638 &lt;br&gt; Rides: 0","Station ID: 639 &lt;br&gt; Rides: 0","Station ID: 640 &lt;br&gt; Rides: 0","Station ID: 641 &lt;br&gt; Rides: 1","Station ID: 642 &lt;br&gt; Rides: 0","Station ID: 644 &lt;br&gt; Rides: 2","Station ID: 645 &lt;br&gt; Rides: 0","Station ID: 646 &lt;br&gt; Rides: 0","Station ID: 788 &lt;br&gt; Rides: 1","Station ID: 789 &lt;br&gt; Rides: 4","Station ID: 790 &lt;br&gt; Rides: 0","Station ID: 791 &lt;br&gt; Rides: 1","Station ID: 792 &lt;br&gt; Rides: 0","Station ID: 793 &lt;br&gt; Rides: 0","Station ID: 794 &lt;br&gt; Rides: 1","Station ID: 795 &lt;br&gt; Rides: 0","Station ID: 796 &lt;br&gt; Rides: 0","Station ID: 797 &lt;br&gt; Rides: 0","Station ID: 799 &lt;br&gt; Rides: 1","Station ID: 800 &lt;br&gt; Rides: 0","Station ID: 802 &lt;br&gt; Rides: 1","Station ID: 803 &lt;br&gt; Rides: 1","Station ID: 804 &lt;br&gt; Rides: 1","Station ID: 806 &lt;br&gt; Rides: 3","Station ID: 807 &lt;br&gt; Rides: 0","Station ID: 808 &lt;br&gt; Rides: 1","Station ID: 809 &lt;br&gt; Rides: 0","Station ID: 810 &lt;br&gt; Rides: 0","Station ID: 811 &lt;br&gt; Rides: 0","Station ID: 812 &lt;br&gt; Rides: 2","Station ID: 814 &lt;br&gt; Rides: 2","Station ID: 815 &lt;br&gt; Rides: 0","Station ID: 816 &lt;br&gt; Rides: 0","Station ID: 817 &lt;br&gt; Rides: 1","Station ID: 818 &lt;br&gt; Rides: 0","Station ID: 819 &lt;br&gt; Rides: 1","Station ID: 1043 &lt;br&gt; Rides: 1","Station ID: 1045 &lt;br&gt; Rides: 1","Station ID: 1046 &lt;br&gt; Rides: 1","Station ID: 1047 &lt;br&gt; Rides: 0","Station ID: 1048 &lt;br&gt; Rides: 0","Station ID: 1816 &lt;br&gt; Rides: 1","Station ID: 1887 &lt;br&gt; Rides: 0","Station ID: 1888 &lt;br&gt; Rides: 0","Station ID: 1889 &lt;br&gt; Rides: 1","Station ID: 1890 &lt;br&gt; Rides: 0","Station ID: 1891 &lt;br&gt; Rides: 0","Station ID: 1892 &lt;br&gt; Rides: 1","Station ID: 1893 &lt;br&gt; Rides: 0","Station ID: 1894 &lt;br&gt; Rides: 0","Station ID: 1895 &lt;br&gt; Rides: 0","Station ID: 1896 &lt;br&gt; Rides: 0","Station ID: 1897 &lt;br&gt; Rides: 0","Station ID: 1898 &lt;br&gt; Rides: 0","Station ID: 1900 &lt;br&gt; Rides: 1","Station ID: 2313 &lt;br&gt; Rides: 1","Station ID: 2314 &lt;br&gt; Rides: 0","Station ID: 2321 &lt;br&gt; Rides: 0","Station ID: 2322 &lt;br&gt; Rides: 3","Station ID: 2336 &lt;br&gt; Rides: 1","Station ID: 2338 &lt;br&gt; Rides: 0","Station ID: 2346 &lt;br&gt; Rides: 0","Station ID: 2352 &lt;br&gt; Rides: 0","Station ID: 3391 &lt;br&gt; Rides: 0","Station ID: 3392 &lt;br&gt; Rides: 0","Station ID: 3393 &lt;br&gt; Rides: 0","Station ID: 3394 &lt;br&gt; Rides: 0","Station ID: 3395 &lt;br&gt; Rides: 0","Station ID: 3396 &lt;br&gt; Rides: 2","Station ID: 3397 &lt;br&gt; Rides: 0","Station ID: 3398 &lt;br&gt; Rides: 0","Station ID: 3399 &lt;br&gt; Rides: 0","Station ID: 3400 &lt;br&gt; Rides: 0","Station ID: 3436 &lt;br&gt; Rides: 0","Station ID: 3437 &lt;br&gt; Rides: 0","Station ID: 3438 &lt;br&gt; Rides: 0","Station ID: 3610 &lt;br&gt; Rides: 0","Station ID: 3724 &lt;br&gt; Rides: 0","Station ID: 4962 &lt;br&gt; Rides: 0","Station ID: 4963 &lt;br&gt; Rides: 0","Station ID: 5255 &lt;br&gt; Rides: 0"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#E41A1C","#377EB8","#4DAF4A","#984EA3","#FF7F00","#FFFF33"],"labels":["0","1","2","3","4","5+"],"na_color":null,"na_label":"NA","opacity":1,"position":"bottomright","type":"factor","title":"Rides on 2024-06-08 13:00:00","extra":null,"layerId":null,"className":"info legend","group":null}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addMiniMap","args":[null,null,"bottomright",150,150,19,19,-5,false,false,false,true,false,false,{"color":"#ff7800","weight":1,"clickable":false},{"color":"#000000","weight":1,"clickable":false,"opacity":0,"fillOpacity":0},{"hideText":"Hide MiniMap","showText":"Show MiniMap"},[]]},{"method":"addControl","args":["<h4>Bicycle Traffic Volume at 2024-06-08 13:00:00 <\/h4>","topright",null,"info legend"]}],"limits":{"lat":[60.34103053759091,60.42334343329279],"lng":[5.273174034250616,5.361202283994771]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="do">##</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_map_leaflet</span>(<span class="st">"2024-05-18 15:00:00"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-98712888749a0719684b" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-98712888749a0719684b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[60.38819667374428,60.37878279018754,60.3913858066772,60.37363792062825,60.39638423113168,60.37831673774706,60.36917984497659,60.38246949877819,60.39296122355292,60.38719801795014,60.39375532002469,60.38606877769094,60.38963215691684,60.39987652272945,60.39245536165015,60.39041411052241,60.38543124330305,60.36742545319046,60.38962622255798,60.39587700209405,60.39198360041338,60.39225759607076,60.39947506336557,60.40569501689434,60.39587808663881,60.39309812241306,60.39265146337743,60.38225474556282,60.39513794308245,60.38393438332219,60.38967202352878,60.38853002489311,60.39705738914522,60.39267683527632,60.37989415164277,60.40858210278468,60.41294568274233,60.39148438859137,60.39397677863769,60.38811788909039,60.37911124360613,60.3911239589824,60.3867091497868,60.38446734102658,60.38151150199542,60.37810721367396,60.37625279587284,60.37514055132067,60.38103776618005,60.37398593985714,60.37608299480986,60.38890977889045,60.38785633733042,60.38705878935416,60.38828383354144,60.39010871793987,60.38668149584837,60.38658166593217,60.38658238047282,60.38824732496975,60.38785371337485,60.38972226200196,60.39118461048114,60.3906427466302,60.39017406113997,60.39770902893835,60.39865649373252,60.38026271377996,60.40222876911276,60.40809699300578,60.41092918246059,60.40190553013225,60.39694922433324,60.39507011297705,60.39514386434325,60.39454985253084,60.39368954863401,60.38316244112318,60.39631712777814,60.37802198798124,60.38592287520763,60.38445114789948,60.39509948572179,60.38604412210009,60.38591618700343,60.39066508674793,60.39901997750764,60.38971028611195,60.389046875094,60.39097915423839,60.37049377702598,60.393323250707,60.40568787342849,60.39886453454994,60.42334343329279,60.37205063801959,60.37957605699611,60.37708169275558,60.38839120838912,60.38422650043982,60.38174958551063,60.38004440263938,60.40175764348675,60.41830821831951,60.40248149976335,60.34970058430721,60.3454585991698,60.34103053759091,60.35131138665341,60.34877037988127,60.37178687508714,60.35779657270476,60.34541065445747,60.34515023813836,60.35476186261224,60.35264796598477,60.35445411401244,60.34929962482292,60.36046422871606,60.34722011283134,60.36532221620897,60.36877700028643,60.39922323697098],[5.328564137089415,5.333327487210227,5.319194867192266,5.35659456239955,5.324169337618514,5.350897458652753,5.349443793165847,5.32609348920866,5.32355212981606,5.322980046239536,5.321792095801356,5.300108307274058,5.286516470683409,5.304686307890734,5.320185176096857,5.332650453823391,5.337431780062616,5.355191063437474,5.3298637396027,5.307755827707297,5.32661819461282,5.314785825568292,5.308762204430565,5.323373526334763,5.325283812313046,5.327022724925883,5.328976911981612,5.332332469910853,5.314946630388023,5.333450454511649,5.333605085201953,5.318665231464365,5.314548482139799,5.317308285189142,5.352077326054496,5.322648583141812,5.320870309021841,5.328519197920741,5.318713236118584,5.331487235597251,5.361202283994771,5.325713785893413,5.299130112557806,5.310007717995973,5.319435364152127,5.331020769519228,5.334276104612741,5.338517421420761,5.35905189499951,5.342082137178068,5.339851409058042,5.333817119783134,5.334459219764085,5.335633911730724,5.332872680372475,5.335387433757433,5.3309780770646,5.327978744635743,5.326041074182427,5.324558211682643,5.318712852428234,5.314854189834826,5.318026298282803,5.324397430398562,5.324792207669702,5.32200057798218,5.322142586456494,5.323223146883635,5.320744723528605,5.325510899047174,5.324662770153281,5.324747767839425,5.313494727727743,5.31879835082907,5.320002322335455,5.327049981572372,5.3265806966931,5.324053067317891,5.31514705012091,5.329383048102329,5.321431717819451,5.324440726278226,5.328645087376344,5.349253890141261,5.319206933440256,5.333027169585989,5.303322069576893,5.314041873201262,5.321882967938819,5.320656172070585,5.353846489647282,5.330654155344547,5.325658910381037,5.306410871328268,5.303070676006087,5.352659970408496,5.344655017198988,5.335575458852787,5.340861023495367,5.311487114022952,5.331698655041777,5.350823586678217,5.316562300638424,5.309946203281243,5.316471128195502,5.278626852345383,5.297121899354551,5.291006144381328,5.289942788398179,5.288172686196418,5.349552885719248,5.342069876253731,5.28332212346433,5.286669158622601,5.293049946752319,5.298680226505098,5.299180336561079,5.288490147562243,5.290126212391755,5.273174034250616,5.344795288464837,5.34229516452919,5.310525720925853],[3,12,5,3,5,5,6,3,3,5,5,5,5,9,5,6,5,3,3,5,6,5,5,3,5,3,5,9,5,3,5,5,5,5,6,3,5,5,5,5,5,5,5,12,3,5,5,12,5,5,5,3,5,3,5,5,5,5,5,5,5,5,3,3,5,21,6,5,3,6,9,3,3,9,5,3,3,3,3,6,5,3,5,3,5,5,3,3,5,5,5,3,6,5,5,5,5,6,5,9,5,6,5,6,5,5,5,5,5,5,15,5,5,5,5,5,5,5,5,5,3,5,5],null,null,{"interactive":true,"className":"","stroke":true,"color":["#377EB8","#FF7F00","#E41A1C","#377EB8","#E41A1C","#E41A1C","#4DAF4A","#377EB8","#377EB8","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#984EA3","#E41A1C","#4DAF4A","#E41A1C","#377EB8","#377EB8","#E41A1C","#4DAF4A","#E41A1C","#E41A1C","#377EB8","#E41A1C","#377EB8","#E41A1C","#984EA3","#E41A1C","#377EB8","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#4DAF4A","#377EB8","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#FF7F00","#377EB8","#E41A1C","#E41A1C","#FF7F00","#E41A1C","#E41A1C","#E41A1C","#377EB8","#E41A1C","#377EB8","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#377EB8","#377EB8","#E41A1C","#FFFF33","#4DAF4A","#E41A1C","#377EB8","#4DAF4A","#984EA3","#377EB8","#377EB8","#984EA3","#E41A1C","#377EB8","#377EB8","#377EB8","#377EB8","#4DAF4A","#E41A1C","#377EB8","#E41A1C","#377EB8","#E41A1C","#E41A1C","#377EB8","#377EB8","#E41A1C","#E41A1C","#E41A1C","#377EB8","#4DAF4A","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#4DAF4A","#E41A1C","#984EA3","#E41A1C","#4DAF4A","#E41A1C","#4DAF4A","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#FFFF33","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#377EB8","#E41A1C","#E41A1C"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#377EB8","#FF7F00","#E41A1C","#377EB8","#E41A1C","#E41A1C","#4DAF4A","#377EB8","#377EB8","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#984EA3","#E41A1C","#4DAF4A","#E41A1C","#377EB8","#377EB8","#E41A1C","#4DAF4A","#E41A1C","#E41A1C","#377EB8","#E41A1C","#377EB8","#E41A1C","#984EA3","#E41A1C","#377EB8","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#4DAF4A","#377EB8","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#FF7F00","#377EB8","#E41A1C","#E41A1C","#FF7F00","#E41A1C","#E41A1C","#E41A1C","#377EB8","#E41A1C","#377EB8","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#377EB8","#377EB8","#E41A1C","#FFFF33","#4DAF4A","#E41A1C","#377EB8","#4DAF4A","#984EA3","#377EB8","#377EB8","#984EA3","#E41A1C","#377EB8","#377EB8","#377EB8","#377EB8","#4DAF4A","#E41A1C","#377EB8","#E41A1C","#377EB8","#E41A1C","#E41A1C","#377EB8","#377EB8","#E41A1C","#E41A1C","#E41A1C","#377EB8","#4DAF4A","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#4DAF4A","#E41A1C","#984EA3","#E41A1C","#4DAF4A","#E41A1C","#4DAF4A","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#FFFF33","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#E41A1C","#377EB8","#E41A1C","#E41A1C"],"fillOpacity":0.2},null,null,["<strong>Station ID:<\/strong> 3 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 5 <br> <strong>Number of Rides:<\/strong> 4 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 7 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 8 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 22 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 24 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 33 <br> <strong>Number of Rides:<\/strong> 2 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 34 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 36 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 49 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 58 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 69 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 70 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 75 <br> <strong>Number of Rides:<\/strong> 3 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 82 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 83 <br> <strong>Number of Rides:<\/strong> 2 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 87 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 98 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 116 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 117 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 131 <br> <strong>Number of Rides:<\/strong> 2 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 132 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 138 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 140 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 150 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 151 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 156 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 157 <br> <strong>Number of Rides:<\/strong> 3 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 212 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 214 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 215 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 216 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 217 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 219 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 220 <br> <strong>Number of Rides:<\/strong> 2 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 221 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 222 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 223 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 298 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 301 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 367 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 368 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 638 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 639 <br> <strong>Number of Rides:<\/strong> 4 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 640 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 641 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 642 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 644 <br> <strong>Number of Rides:<\/strong> 4 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 645 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 646 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 788 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 789 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 790 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 791 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 792 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 793 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 794 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 795 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 796 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 797 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 799 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 800 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 802 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 803 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 804 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 806 <br> <strong>Number of Rides:<\/strong> 7 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 807 <br> <strong>Number of Rides:<\/strong> 2 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 808 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 809 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 810 <br> <strong>Number of Rides:<\/strong> 2 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 811 <br> <strong>Number of Rides:<\/strong> 3 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 812 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 814 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 815 <br> <strong>Number of Rides:<\/strong> 3 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 816 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 817 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 818 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 819 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1043 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1045 <br> <strong>Number of Rides:<\/strong> 2 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1046 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1047 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1048 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1816 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1887 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1888 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1889 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1890 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1891 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1892 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1893 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1894 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1895 <br> <strong>Number of Rides:<\/strong> 2 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1896 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1897 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1898 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 1900 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 2313 <br> <strong>Number of Rides:<\/strong> 2 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 2314 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 2321 <br> <strong>Number of Rides:<\/strong> 3 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 2322 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 2336 <br> <strong>Number of Rides:<\/strong> 2 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 2338 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 2346 <br> <strong>Number of Rides:<\/strong> 2 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 2352 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 3391 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 3392 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 3393 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 3394 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 3395 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 3396 <br> <strong>Number of Rides:<\/strong> 5 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 3397 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 3398 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 3399 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 3400 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 3436 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 3437 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 3438 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 3610 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 3724 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 4962 <br> <strong>Number of Rides:<\/strong> 1 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 4963 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00","<strong>Station ID:<\/strong> 5255 <br> <strong>Number of Rides:<\/strong> 0 <br> <strong>Time:<\/strong> 2024-05-18 15:00:00"],null,["Station ID: 3 &lt;br&gt; Rides: 1","Station ID: 5 &lt;br&gt; Rides: 4","Station ID: 7 &lt;br&gt; Rides: 0","Station ID: 8 &lt;br&gt; Rides: 1","Station ID: 22 &lt;br&gt; Rides: 0","Station ID: 24 &lt;br&gt; Rides: 0","Station ID: 33 &lt;br&gt; Rides: 2","Station ID: 34 &lt;br&gt; Rides: 1","Station ID: 36 &lt;br&gt; Rides: 1","Station ID: 49 &lt;br&gt; Rides: 0","Station ID: 58 &lt;br&gt; Rides: 0","Station ID: 69 &lt;br&gt; Rides: 0","Station ID: 70 &lt;br&gt; Rides: 0","Station ID: 75 &lt;br&gt; Rides: 3","Station ID: 82 &lt;br&gt; Rides: 0","Station ID: 83 &lt;br&gt; Rides: 2","Station ID: 87 &lt;br&gt; Rides: 0","Station ID: 98 &lt;br&gt; Rides: 1","Station ID: 116 &lt;br&gt; Rides: 1","Station ID: 117 &lt;br&gt; Rides: 0","Station ID: 131 &lt;br&gt; Rides: 2","Station ID: 132 &lt;br&gt; Rides: 0","Station ID: 138 &lt;br&gt; Rides: 0","Station ID: 140 &lt;br&gt; Rides: 1","Station ID: 150 &lt;br&gt; Rides: 0","Station ID: 151 &lt;br&gt; Rides: 1","Station ID: 156 &lt;br&gt; Rides: 0","Station ID: 157 &lt;br&gt; Rides: 3","Station ID: 212 &lt;br&gt; Rides: 0","Station ID: 214 &lt;br&gt; Rides: 1","Station ID: 215 &lt;br&gt; Rides: 0","Station ID: 216 &lt;br&gt; Rides: 0","Station ID: 217 &lt;br&gt; Rides: 0","Station ID: 219 &lt;br&gt; Rides: 0","Station ID: 220 &lt;br&gt; Rides: 2","Station ID: 221 &lt;br&gt; Rides: 1","Station ID: 222 &lt;br&gt; Rides: 0","Station ID: 223 &lt;br&gt; Rides: 0","Station ID: 298 &lt;br&gt; Rides: 0","Station ID: 301 &lt;br&gt; Rides: 0","Station ID: 367 &lt;br&gt; Rides: 0","Station ID: 368 &lt;br&gt; Rides: 0","Station ID: 638 &lt;br&gt; Rides: 0","Station ID: 639 &lt;br&gt; Rides: 4","Station ID: 640 &lt;br&gt; Rides: 1","Station ID: 641 &lt;br&gt; Rides: 0","Station ID: 642 &lt;br&gt; Rides: 0","Station ID: 644 &lt;br&gt; Rides: 4","Station ID: 645 &lt;br&gt; Rides: 0","Station ID: 646 &lt;br&gt; Rides: 0","Station ID: 788 &lt;br&gt; Rides: 0","Station ID: 789 &lt;br&gt; Rides: 1","Station ID: 790 &lt;br&gt; Rides: 0","Station ID: 791 &lt;br&gt; Rides: 1","Station ID: 792 &lt;br&gt; Rides: 0","Station ID: 793 &lt;br&gt; Rides: 0","Station ID: 794 &lt;br&gt; Rides: 0","Station ID: 795 &lt;br&gt; Rides: 0","Station ID: 796 &lt;br&gt; Rides: 0","Station ID: 797 &lt;br&gt; Rides: 0","Station ID: 799 &lt;br&gt; Rides: 0","Station ID: 800 &lt;br&gt; Rides: 0","Station ID: 802 &lt;br&gt; Rides: 1","Station ID: 803 &lt;br&gt; Rides: 1","Station ID: 804 &lt;br&gt; Rides: 0","Station ID: 806 &lt;br&gt; Rides: 7","Station ID: 807 &lt;br&gt; Rides: 2","Station ID: 808 &lt;br&gt; Rides: 0","Station ID: 809 &lt;br&gt; Rides: 1","Station ID: 810 &lt;br&gt; Rides: 2","Station ID: 811 &lt;br&gt; Rides: 3","Station ID: 812 &lt;br&gt; Rides: 1","Station ID: 814 &lt;br&gt; Rides: 1","Station ID: 815 &lt;br&gt; Rides: 3","Station ID: 816 &lt;br&gt; Rides: 0","Station ID: 817 &lt;br&gt; Rides: 1","Station ID: 818 &lt;br&gt; Rides: 1","Station ID: 819 &lt;br&gt; Rides: 1","Station ID: 1043 &lt;br&gt; Rides: 1","Station ID: 1045 &lt;br&gt; Rides: 2","Station ID: 1046 &lt;br&gt; Rides: 0","Station ID: 1047 &lt;br&gt; Rides: 1","Station ID: 1048 &lt;br&gt; Rides: 0","Station ID: 1816 &lt;br&gt; Rides: 1","Station ID: 1887 &lt;br&gt; Rides: 0","Station ID: 1888 &lt;br&gt; Rides: 0","Station ID: 1889 &lt;br&gt; Rides: 1","Station ID: 1890 &lt;br&gt; Rides: 1","Station ID: 1891 &lt;br&gt; Rides: 0","Station ID: 1892 &lt;br&gt; Rides: 0","Station ID: 1893 &lt;br&gt; Rides: 0","Station ID: 1894 &lt;br&gt; Rides: 1","Station ID: 1895 &lt;br&gt; Rides: 2","Station ID: 1896 &lt;br&gt; Rides: 0","Station ID: 1897 &lt;br&gt; Rides: 0","Station ID: 1898 &lt;br&gt; Rides: 0","Station ID: 1900 &lt;br&gt; Rides: 0","Station ID: 2313 &lt;br&gt; Rides: 2","Station ID: 2314 &lt;br&gt; Rides: 0","Station ID: 2321 &lt;br&gt; Rides: 3","Station ID: 2322 &lt;br&gt; Rides: 0","Station ID: 2336 &lt;br&gt; Rides: 2","Station ID: 2338 &lt;br&gt; Rides: 0","Station ID: 2346 &lt;br&gt; Rides: 2","Station ID: 2352 &lt;br&gt; Rides: 0","Station ID: 3391 &lt;br&gt; Rides: 0","Station ID: 3392 &lt;br&gt; Rides: 0","Station ID: 3393 &lt;br&gt; Rides: 0","Station ID: 3394 &lt;br&gt; Rides: 0","Station ID: 3395 &lt;br&gt; Rides: 0","Station ID: 3396 &lt;br&gt; Rides: 5","Station ID: 3397 &lt;br&gt; Rides: 0","Station ID: 3398 &lt;br&gt; Rides: 0","Station ID: 3399 &lt;br&gt; Rides: 0","Station ID: 3400 &lt;br&gt; Rides: 0","Station ID: 3436 &lt;br&gt; Rides: 0","Station ID: 3437 &lt;br&gt; Rides: 0","Station ID: 3438 &lt;br&gt; Rides: 0","Station ID: 3610 &lt;br&gt; Rides: 0","Station ID: 3724 &lt;br&gt; Rides: 0","Station ID: 4962 &lt;br&gt; Rides: 1","Station ID: 4963 &lt;br&gt; Rides: 0","Station ID: 5255 &lt;br&gt; Rides: 0"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#E41A1C","#377EB8","#4DAF4A","#984EA3","#FF7F00","#FFFF33"],"labels":["0","1","2","3","4","5+"],"na_color":null,"na_label":"NA","opacity":1,"position":"bottomright","type":"factor","title":"Rides on 2024-05-18 15:00:00","extra":null,"layerId":null,"className":"info legend","group":null}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addMiniMap","args":[null,null,"bottomright",150,150,19,19,-5,false,false,false,true,false,false,{"color":"#ff7800","weight":1,"clickable":false},{"color":"#000000","weight":1,"clickable":false,"opacity":0,"fillOpacity":0},{"hideText":"Hide MiniMap","showText":"Show MiniMap"},[]]},{"method":"addControl","args":["<h4>Bicycle Traffic Volume at 2024-05-18 15:00:00 <\/h4>","topright",null,"info legend"]}],"limits":{"lat":[60.34103053759091,60.42334343329279],"lng":[5.273174034250616,5.361202283994771]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+</section>
+<section id="part-2-predictive-analytics" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-predictive-analytics">Part 2: Predictive Analytics</h2>
+<section id="regression-modeling" class="level3">
+<h3 class="anchored" data-anchor-id="regression-modeling">Regression Modeling</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span><span class="sc">/</span><span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<section id="linear-regression" class="level4">
+<h4 class="anchored" data-anchor-id="linear-regression">Linear Regression</h4>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span><span class="sc">*</span><span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25</code></pre>
+</div>
+</div>
+</section>
+<section id="multiple-linear-regression" class="level4">
+<h4 class="anchored" data-anchor-id="multiple-linear-regression">Multiple Linear Regression</h4>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dv">6-6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="weather-data-integration" class="level3">
+<h3 class="anchored" data-anchor-id="weather-data-integration">Weather Data Integration</h3>
+<section id="combining-bike-data-with-weather-data" class="level4">
+<h4 class="anchored" data-anchor-id="combining-bike-data-with-weather-data">Combining Bike Data with Weather Data</h4>
+</section>
+<section id="feature-engineering" class="level4">
+<h4 class="anchored" data-anchor-id="feature-engineering">Feature Engineering</h4>
+</section>
+</section>
+<section id="advanced-prediction-models" class="level3">
+<h3 class="anchored" data-anchor-id="advanced-prediction-models">Advanced Prediction Models</h3>
+<section id="machine-learning-models" class="level4">
+<h4 class="anchored" data-anchor-id="machine-learning-models">Machine Learning Models</h4>
+</section>
+<section id="model-evaluation-and-comparison" class="level4">
+<h4 class="anchored" data-anchor-id="model-evaluation-and-comparison">Model Evaluation and Comparison</h4>
+</section>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
