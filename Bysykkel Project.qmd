@@ -1,0 +1,80 @@
+---
+title: "Bergen Bysykkel 2024: Exploratory and Predictive Analytics"
+author: "Syed Amjad Ali"
+format:
+  html:
+    code-fold: true  # Allows code folding
+    toc: true        # Adds a table of contents
+    toc-location: left  # Optional: places TOC in the left sidebar
+editor: visual
+---
+
+# Introduction {.tabset .tabset-pills}
+
+We'll use three examples:
+
+1.  Demand for cigarettes (effect of price on quantity demanded)
+2.  Demand for Norwegian salmon exports (effect of export price on export demand)
+3.  Returns to education (effect of education on wages)
+
+In each example, think about the requirements for a valid instrument. Try to come up with arguments for and against.
+
+## Simple IV {.tabset .tabset-pills}
+
+### Cigarette demand and taxes
+
+```{r load cigarette data}
+1+1
+```
+
+#### Estimation
+
+We report an OLS regression of consumption on price for reference, the IV estimate using tax as an instrument, and an OLS regression of price on tax.
+
+```{r cigarette simple iv}
+2+2
+```
+
+#### "Manual" IV estimator
+
+```{r simple iv and ols estimators}
+3+3
+```
+
+### Salmon export demand and input prices
+
+```{r load salmon data}
+
+```
+
+Look at development in exported quantity and price, and fish meal price.
+
+```{r plot salmon variables}
+
+```
+
+#### Estimation
+
+```{r salmon simple iv}
+
+```
+
+#### Note on $R^2$
+
+### Returns to education and distance
+
+```{r load education data}
+
+```
+
+#### Estimation
+
+```{r education simple iv}
+
+```
+
+## IV with controls {.tabset .tabset-pills}
+
+Try to think about what problem the control(s) solve (if any). What are possible remaining problems (violation of assumptions) in each case?
+
+### Cigarette demand and taxes
