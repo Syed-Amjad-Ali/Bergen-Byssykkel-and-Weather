@@ -1,5 +1,5 @@
 ---
-title: "Bergen Bysykkel 2024: Exploratory and Predictive Analytics"
+title: "Can Data Predict Bergen’s Bysykkel Usage? Insights and Trends from 2024"
 author: "Syed Amjad Ali"
 format:
   html:
@@ -17,18 +17,13 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 
 ## Introduction
 
-The Bergen Bysykkel 2024 project analyzes bicycle rental patterns across Bergen, Norway, using historical data from Bysykkel and supplementary weather observations. This analysis is part of a two-stage initiative:
+This project analyzes bicycle rental patterns across Bergen, Norway, using historical data from [Bergen Bysykkel](https://bergenbysykkel.no/apne-data/historisk) and hourly weather observations obtained from [SeKlima](https://seklima.met.no/observations/?fbclid=IwY2xjawHC3BlleHRuA2FlbQIxMAABHR-1J8AxQO7W68khnBEDM7aVue4GLeWghu0CrBYHs3b1dowE8Wq2u1oBXQ_aem_HFWzKgdTgLH6cHBCCTq4RA). The analysis is structured into two parts:
 
 **Part 1** focuses on foundational tasks: cleaning rental data, building station-specific linear regression models, and visualizing bike traffic patterns across the city using dynamic maps.
 
 **Part 2** will integrate weather data and employ advanced predictive modeling techniques to refine our understanding of rental trends.
 
 This project aims to address key operational and strategic questions: - How does bicycle usage vary by station and time of day in Bergen? - How can we predict hourly ride counts to better manage station capacity? - What insights can visualizations provide for urban planning and resource allocation?
-
-### Data Sources
-
--   [**Bysykkel Data**](https://bergenbysykkel.no/apne-data/historisk): Historical bike rental data provided by Bergen Bysykkel.
--   [**Weather Data**](https://seklima.met.no/observations/?fbclid=IwY2xjawHC3BlleHRuA2FlbQIxMAABHR-1J8AxQO7W68khnBEDM7aVue4GLeWghu0CrBYHs3b1dowE8Wq2u1oBXQ_aem_HFWzKgdTgLH6cHBCCTq4RA): Hourly weather observations obtained from SeKlima.
 
 By tackling these questions and leveraging robust datasets, we aim to uncover actionable insights to enhance Bergen's bike-sharing system and improve user experience.
 
@@ -49,6 +44,7 @@ library(purrr)
 library(tidyverse)
 library(ggmap)
 library(leaflet)
+library(knitr)
 ```
 
 ### Data Collection and Preprocessing
@@ -64,7 +60,8 @@ filenames <- list.files("byssykkel-data-2024", pattern=".csv", full.names=TRUE)
 # Combine all the data from these files into a single dataset.
 bike_rides_2024_data <- rbindlist(lapply(filenames,fread))
 
-
+# Render a formatted table for the first 10 rows
+kable(head(bike_rides_2024_data, 5), format = "html")
 ```
 
 #### Creating Station-Date-Hour Combinations
@@ -215,7 +212,8 @@ station
 df_agg_lonlat <- left_join(df_agg, station , by = c("start_station_id" = "start_station_id"))
 
 # Display the first 10 rows of the updated dataset for verification.
-head(df_agg_lonlat,10)
+
+kable(head(df_agg_lonlat,10), format = "html")
 ```
 
 #### Identifying Weekly Ride Patterns
