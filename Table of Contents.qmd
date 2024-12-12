@@ -3,6 +3,7 @@ title: "Bergen Bysykkel 2024: Exploratory and Predictive Analytics"
 author: "Syed Amjad Ali"
 format:
   html:
+    self-contained: true
     code-fold: true  # Allows code folding
     toc: true        # Adds a table of contents
     toc-location: left  # Optional: places TOC in the left sidebar
@@ -14,7 +15,22 @@ editor: visual
 knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 ```
 
-# Bergen Bysykkel 2024: Exploratory and Predictive Analytics
+## Introduction
+
+The Bergen Bysykkel 2024 project analyzes bicycle rental patterns across Bergen, Norway, using historical data from Bysykkel and supplementary weather observations. This analysis is part of a two-stage initiative:
+
+**Part 1** focuses on foundational tasks: cleaning rental data, building station-specific linear regression models, and visualizing bike traffic patterns across the city using dynamic maps.
+
+**Part 2** will integrate weather data and employ advanced predictive modeling techniques to refine our understanding of rental trends.
+
+This project aims to address key operational and strategic questions: - How does bicycle usage vary by station and time of day in Bergen? - How can we predict hourly ride counts to better manage station capacity? - What insights can visualizations provide for urban planning and resource allocation?
+
+### Data Sources
+
+-   [**Bysykkel Data**](https://bergenbysykkel.no/apne-data/historisk): Historical bike rental data provided by Bergen Bysykkel.
+-   [**Weather Data**](https://seklima.met.no/observations/?fbclid=IwY2xjawHC3BlleHRuA2FlbQIxMAABHR-1J8AxQO7W68khnBEDM7aVue4GLeWghu0CrBYHs3b1dowE8Wq2u1oBXQ_aem_HFWzKgdTgLH6cHBCCTq4RA): Hourly weather observations obtained from SeKlima.
+
+By tackling these questions and leveraging robust datasets, we aim to uncover actionable insights to enhance Bergen's bike-sharing system and improve user experience.
 
 ## Part 1: Exploratory Analysis
 
@@ -127,6 +143,8 @@ df_agg <- df_agg %>%
 # Display the first 10 rows of the updated dataset for verification.
 head(df_agg,10)
 ```
+
+The dataset now contains 8760 observations per station (one per hour for the entire year), capturing total ride counts for each hour.
 
 ### Data Validation
 
@@ -279,8 +297,13 @@ $$
 y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_k x_k + \epsilon
 $$
 
-Here:\
-- $(y)$ : Number of bike rides (response variable) - $(\beta_0)$: Intercept term, representing the baseline value of $(y)$ when all predictors are zero [-]{.underline} $(\beta_1, \beta_2, \dots, \beta_k)$: Coefficients representing the effect of predictors on $(y)$ - $(x_1, x_2, \dots, x_k)$: Predictors (e.g., weekday, hour of the day) [-]{.underline} $(\epsilon)$: Residual error, capturing the variability in $(y)$ not explained by the predictors
+Here:
+
+-   $(y)$: Number of bike rides (response variable).
+-   $(\beta_0)$: Intercept term, representing the baseline value of $(y)$ when all predictors are zero.
+-   $(\beta_1, \beta_2, \dots, \beta_k)$: Coefficients representing the effect of predictors on $(y)$.
+-   $(x_1, x_2, \dots, x_k)$: Predictors (e.g., weekday, hour of the day).
+-   $(\epsilon)$: Residual error, capturing the variability in $(y)$ not explained by the predictors.
 
 #### Data Splitting for Model Training
 
@@ -398,17 +421,20 @@ predictions_from_all_stations # Display the consolidated predictions dataset
 
 #### Visualizing Predicted Ride Patterns
 
-```{r}
+In this section, we visualize the predicted hourly bicycle ride patterns for all stations over an entire week. The objective is to understand how ride volumes vary across different hours of the day and days of the week. This visualization provides insights into station-specific trends and helps identify periods of high and low activity.
 
-##(c) Create a set of plots showing the predicted number of bicycle rides throughout an entire week.
-#Place predicted volume on the y-axis and the hour of day on the x-axis. 
-#Make one plot per day of week. Use different colors for each station, 
-#and format the plots as appropriate.
+The plot uses separate panels for each day of the week, with predicted ride volumes on the y-axis and the hour of the day on the x-axis. Each station is represented by a unique color, offering a comprehensive view of trends across all stations, even though detailed comparisons between individual stations maybe less emphasized due to the scale of the data.
+
+```{r fig.height=12, fig.width=10}
+
+# Filter data for the week of 2024-10-01 to 2024-10-07 and create the plot
 
 
 predictions_from_all_stations %>%
+  mutate(start_station_id = factor(start_station_id, 
+                                   labels = str_wrap(levels(factor(start_station_id)), width = 10))) %>%
   filter(floor_start_dh > "2024-10-01 00:00:00", floor_start_dh <= "2024-10-08 00:00:00") %>%
-  ggplot(aes(x = as.numeric(start_hour), y = predictions, color = factor(start_station_id))) +
+  ggplot(aes(x = as.numeric(start_hour), y = predictions, color = start_station_id)) +
   geom_line() +
   labs(
     x = "Start Hour",
@@ -416,7 +442,16 @@ predictions_from_all_stations %>%
     colour = "Start Station ID",
     title = "Hourly Bicycle Ride Count Prediction Per Station from 2024-10-01 to 2024-10-07"
   ) + 
-  facet_wrap(vars(weekday_start), scales = "fixed", ncol = 1)
+  facet_wrap(vars(weekday_start), scales = "fixed", ncol = 1) +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "horizontal",
+    legend.text = element_text(size = 8),
+    legend.title = element_text(size = 10),
+    strip.text = element_text(size = 12)
+  ) +
+  guides(color = guide_legend(nrow = 10))   
+# Arrange legend items in 2 rows# Create separate panels for each day of the week
 
 
 ```
