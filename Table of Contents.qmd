@@ -17,17 +17,17 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 
 ## Introduction
 
-This project analyzes bicycle rental patterns across Bergen, Norway, using historical data from [Bergen Bysykkel](https://bergenbysykkel.no/apne-data/historisk) and hourly weather observations obtained from [SeKlima](https://seklima.met.no/observations/?fbclid=IwY2xjawHC3BlleHRuA2FlbQIxMAABHR-1J8AxQO7W68khnBEDM7aVue4GLeWghu0CrBYHs3b1dowE8Wq2u1oBXQ_aem_HFWzKgdTgLH6cHBCCTq4RA). The analysis is structured into two parts:
+This project analyzes bicycle rental patterns across Bergen, Norway, using historical data from [Bergen Bysykkel](https://bergenbysykkel.no/apne-data/historisk) and hourly weather observations obtained from [SeKlima](https://seklima.met.no/observations/?fbclid=IwY2xjawHC3BlleHRuA2FlbQIxMAABHR-1J8AxQO7W68khnBEDM7aVue4GLeWghu0CrBYHs3b1dowE8Wq2u1oBXQ_aem_HFWzKgdTgLH6cHBCCTq4RA). This analysis is structured into two parts:
 
-**Part 1** focuses on foundational tasks: cleaning rental data, building station-specific linear regression models, and visualizing bike traffic patterns across the city using dynamic maps.
+[Part 1: Exploratory Analysis](#sec-part-1-exploratory-analysis) focuses on foundational data cleaning, exploratory analysis, and simple predictive modelling.
 
-**Part 2** will integrate weather data and employ advanced predictive modeling techniques to refine our understanding of rental trends.
+[Part 2: Predictive Analytics](#sec-part-2-predictive-analytics) will integrate weather data and employ advanced predictive techniques to refine our understanding of rental trends.
 
 This project aims to address key operational and strategic questions: - How does bicycle usage vary by station and time of day in Bergen? - How can we predict hourly ride counts to better manage station capacity? - What insights can visualizations provide for urban planning and resource allocation?
 
 By tackling these questions and leveraging robust datasets, we aim to uncover actionable insights to enhance Bergen's bike-sharing system and improve user experience.
 
-## Part 1: Exploratory Analysis
+## Part 1: Exploratory Analysis {#sec-part-1-exploratory-analysis}
 
 ### Setup
 
@@ -454,7 +454,7 @@ predictions_from_all_stations %>%
 
 ```
 
-## Part 2: Predictive Analytics
+## Part 2: Predictive Analytics {#sec-part-2-predictive-analytics}
 
 ### Regression Modeling
 
