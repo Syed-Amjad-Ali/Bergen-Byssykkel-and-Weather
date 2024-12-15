@@ -1,4 +1,4 @@
-# Bergen Bysykkel 2024: Cleaning, Predicting, and Mapping (Part 1)
+# Bergen Bysykkel 2024: R Edition- Cleaning, Predicting, and Mapping (Part 1)
 
 This is Part 1 of a two-part exploration into Bergen's bicycle rental trends. In this installment, we roll up our sleeves for **data cleaning**, build **simple predictive models**, and end with a **semi-interactive map** showcasing bike traffic across stations. Part 2 promises to dive deeper into the "data sciency" stuff, exploring advanced methods to predict ride volumes with greater precision.
 
